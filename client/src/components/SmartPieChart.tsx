@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 
 interface PieData {
   name: string;
@@ -8,18 +8,20 @@ interface PieData {
 interface SmartPieChartProps {
   data: PieData[];
   colors: string[];
+  maxCategoriesInChart?: number;
 }
 
-export default function SmartPieChart({ data, colors }: SmartPieChartProps) {
+export default function SmartPieChart({ data, colors, maxCategoriesInChart = 3 }: SmartPieChartProps) {
   const total = data.reduce((sum, item) => sum + item.value, 0);
   
-  // Separar dados grandes e pequenos
-  const largeItems = data.filter(item => (item.value / total) > 0.08);
-  const smallItems = data.filter(item => (item.value / total) <= 0.08);
+  // Se temos mais categorias que o limite, mostrar apenas as maiores no gráfico
+  const chartData = data.length > maxCategoriesInChart 
+    ? data.slice(0, maxCategoriesInChart)
+    : data;
 
   const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, name, value }: any) => {
-    // Só mostrar labels para itens grandes (> 8%)
-    if (percent <= 0.08) return null;
+    // Só mostrar labels para itens que representam mais de 5% do total
+    if (percent <= 0.05) return null;
 
     const RADIAN = Math.PI / 180;
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -57,53 +59,56 @@ export default function SmartPieChart({ data, colors }: SmartPieChartProps) {
 
   return (
     <div className="w-full">
-      <ResponsiveContainer width="100%" height={350}>
+      <ResponsiveContainer width="100%" height={300}>
         <PieChart>
           <Pie
-            data={data}
+            data={chartData}
             cx="50%"
             cy="50%"
             labelLine={false}
             label={<CustomLabel />}
-            outerRadius={100}
+            outerRadius={80}
             fill="#1B7D3F"
             dataKey="value"
           >
-            {data.map((entry, index) => (
+            {chartData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
             ))}
           </Pie>
           <Tooltip content={<CustomTooltip />} />
-          <Legend 
-            wrapperStyle={{ paddingTop: '20px' }}
-            formatter={(value, entry: any) => {
-              const item = entry?.payload;
-              if (!item) return value;
-              const percentage = ((item.value / total) * 100).toFixed(1);
-              return `${item.name}: ${item.value} (${percentage}%)`;
-            }}
-            verticalAlign="bottom"
-            height={36}
-          />
         </PieChart>
       </ResponsiveContainer>
 
-      {/* Legenda adicional para itens pequenos */}
-      {smallItems.length > 0 && (
-        <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-          <p className="text-xs font-semibold text-black mb-2">Categorias com menor representação:</p>
-          <div className="grid grid-cols-2 gap-2">
-            {smallItems.map((item, index) => {
+      {/* Legenda em formato de tabela */}
+      <div className="mt-6 overflow-x-auto">
+        <table className="w-full text-sm border-collapse">
+          <tbody>
+            {data.map((item, index) => {
               const percentage = ((item.value / total) * 100).toFixed(1);
               return (
-                <div key={index} className="text-xs text-black">
-                  <span className="font-medium">{item.name}:</span> {item.value} ({percentage}%)
-                </div>
+                <tr key={index} className="border-b border-gray-200 hover:bg-gray-50">
+                  <td className="py-2 px-3">
+                    <div className="flex items-center gap-2">
+                      <div 
+                        className="w-4 h-4 rounded" 
+                        style={{ backgroundColor: colors[index % colors.length] }}
+                      ></div>
+                      <span className="text-black font-medium">{item.name}</span>
+                    </div>
+                  </td>
+                  <td className="py-2 px-3 text-right text-black font-medium">{item.value}</td>
+                  <td className="py-2 px-3 text-right text-gray-600">{percentage}%</td>
+                </tr>
               );
             })}
-          </div>
-        </div>
-      )}
+            <tr className="bg-gray-50 font-semibold">
+              <td className="py-2 px-3 text-black">Total</td>
+              <td className="py-2 px-3 text-right text-black">{total}</td>
+              <td className="py-2 px-3 text-right text-black">100%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
