@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Users, TrendingUp, HomeIcon, Briefcase } from 'lucide-react';
 import PopulationPyramid from '@/components/PopulationPyramid';
-import SmartPieChart from '@/components/SmartPieChart';
+import SmartChart from '@/components/SmartChart';
 
 interface DashboardData {
   total_comerciantes: number;
@@ -86,10 +86,21 @@ export default function Home() {
     );
   }
 
-  // Paleta de cores com tons mais discrepantes
-  const COLORS_GREEN = ['#1B7D3F', '#0F5C28', '#156B32', '#2D9B5F', '#1A6B35', '#0D4620'];
-  const COLORS_YELLOW = ['#FFD700', '#FFC700', '#FFE066', '#FFB700', '#FFA500', '#FF9500'];
-  const COLORS_MIXED = ['#1B7D3F', '#FFD700', '#0F5C28', '#FFC700', '#156B32', '#FFE066', '#2D9B5F', '#FFB700'];
+  // Paleta de cores variada - Verde, Amarelo, Azul, Turquesa e outros tons
+  const COLORS = [
+    '#1B7D3F',      // Verde escuro (principal)
+    '#FFD700',      // Amarelo (principal)
+    '#0066CC',      // Azul
+    '#00BCD4',      // Turquesa
+    '#156B32',      // Verde médio
+    '#FFC700',      // Amarelo médio
+    '#0052A3',      // Azul escuro
+    '#00ACC1',      // Turquesa escuro
+    '#2D9B5F',      // Verde claro
+    '#FFE066',      // Amarelo claro
+    '#1E88E5',      // Azul claro
+    '#26C6DA',      // Turquesa claro
+  ];
 
   // Função para converter para dados de gráfico e ordenar por valor
   const toChartData = (obj: Record<string, number>, sort = true) => {
@@ -168,7 +179,7 @@ export default function Home() {
                   : 'border-transparent text-gray-600 hover:text-gray-800'
               }`}
             >
-              Titular do Imóvel
+              Titular do Imóvel ({data.total_comerciantes})
             </button>
             <button
               onClick={() => setAba('conjuge')}
@@ -236,33 +247,13 @@ export default function Home() {
               {/* Gênero */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Gênero</h2>
-                <SmartPieChart data={generoData} colors={COLORS_MIXED} maxCategoriesInChart={2} />
+                <SmartChart data={generoData} colors={COLORS} />
               </div>
 
               {/* Etnia */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Etnia</h2>
-                <ResponsiveContainer width="100%" height={350}>
-                  <BarChart data={etniaData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-                    <XAxis 
-                      dataKey="name" 
-                      angle={-45} 
-                      textAnchor="end" 
-                      height={100}
-                      tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }}
-                      interval={0}
-                    />
-                    <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Bar 
-                      dataKey="value" 
-                      fill="#1B7D3F" 
-                      radius={[8, 8, 0, 0]}
-                      label={{ position: 'top', fill: '#000000', fontSize: 12, fontWeight: 500 }}
-                    />
-                  </BarChart>
-                </ResponsiveContainer>
+                <SmartChart data={etniaData} colors={COLORS} />
               </div>
             </div>
 
@@ -277,26 +268,13 @@ export default function Home() {
               {/* Estado Civil */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Estado Civil</h2>
-                <SmartPieChart data={estadoCivilData} colors={COLORS_MIXED} maxCategoriesInChart={2} />
+                <SmartChart data={estadoCivilData} colors={COLORS} />
               </div>
 
               {/* Escolaridade */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Escolaridade</h2>
-                <ResponsiveContainer width="100%" height={350}>
-                  <BarChart data={escolaridadeData} layout="vertical" margin={{ top: 5, right: 30, left: 200, bottom: 5 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-                    <XAxis type="number" tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
-                    <YAxis dataKey="name" type="category" width={190} tick={{ fill: '#000000', fontSize: 11, fontWeight: 500 }} />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Bar 
-                      dataKey="value" 
-                      fill="#156B32" 
-                      radius={[0, 8, 8, 0]}
-                      label={{ position: 'right', fill: '#000000', fontSize: 12, fontWeight: 500 }}
-                    />
-                  </BarChart>
-                </ResponsiveContainer>
+                <SmartChart data={escolaridadeData} colors={COLORS} />
               </div>
             </div>
 
@@ -305,33 +283,13 @@ export default function Home() {
               {/* Moradia */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Forma de Ocupação de Moradia</h2>
-                <SmartPieChart data={moradiaData} colors={COLORS_MIXED} maxCategoriesInChart={2} />
+                <SmartChart data={moradiaData} colors={COLORS} />
               </div>
 
               {/* Habitação */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Condição da Habitação</h2>
-                <ResponsiveContainer width="100%" height={350}>
-                  <BarChart data={habitacaoData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-                    <XAxis 
-                      dataKey="name" 
-                      angle={-45} 
-                      textAnchor="end" 
-                      height={100}
-                      tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }}
-                      interval={0}
-                    />
-                    <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Bar 
-                      dataKey="value" 
-                      fill="#FFD700" 
-                      radius={[8, 8, 0, 0]}
-                      label={{ position: 'top', fill: '#000000', fontSize: 12, fontWeight: 500 }}
-                    />
-                  </BarChart>
-                </ResponsiveContainer>
+                <SmartChart data={habitacaoData} colors={COLORS} />
               </div>
             </div>
 
@@ -340,27 +298,7 @@ export default function Home() {
               {/* Ocupação Estabelecimento */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Forma de Ocupação do Estabelecimento</h2>
-                <ResponsiveContainer width="100%" height={350}>
-                  <BarChart data={ocupacaoEstabelecimentoData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-                    <XAxis 
-                      dataKey="name" 
-                      angle={-45} 
-                      textAnchor="end" 
-                      height={100}
-                      tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }}
-                      interval={0}
-                    />
-                    <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Bar 
-                      dataKey="value" 
-                      fill="#1B7D3F" 
-                      radius={[8, 8, 0, 0]}
-                      label={{ position: 'top', fill: '#000000', fontSize: 12, fontWeight: 500 }}
-                    />
-                  </BarChart>
-                </ResponsiveContainer>
+                <SmartChart data={ocupacaoEstabelecimentoData} colors={COLORS} />
               </div>
 
               {/* Top 10 Cidades */}
@@ -395,33 +333,13 @@ export default function Home() {
               {/* Fontes de Renda */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Fontes de Renda</h2>
-                <SmartPieChart data={fontesRendaData} colors={COLORS_MIXED} maxCategoriesInChart={2} />
+                <SmartChart data={fontesRendaData} colors={COLORS} />
               </div>
 
               {/* Benefícios do Governo */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Benefícios do Governo</h2>
-                <ResponsiveContainer width="100%" height={350}>
-                  <BarChart data={beneficiosData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-                    <XAxis 
-                      dataKey="name" 
-                      angle={-45} 
-                      textAnchor="end" 
-                      height={100}
-                      tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }}
-                      interval={0}
-                    />
-                    <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Bar 
-                      dataKey="value" 
-                      fill="#FFD700" 
-                      radius={[8, 8, 0, 0]}
-                      label={{ position: 'top', fill: '#000000', fontSize: 12, fontWeight: 500 }}
-                    />
-                  </BarChart>
-                </ResponsiveContainer>
+                <SmartChart data={beneficiosData} colors={COLORS} />
               </div>
             </div>
 
@@ -497,7 +415,7 @@ export default function Home() {
               {/* Estrutura do Comércio */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Estrutura do Comércio</h2>
-                <SmartPieChart data={estruturaComercioData} colors={COLORS_MIXED} maxCategoriesInChart={2} />
+                <SmartChart data={estruturaComercioData} colors={COLORS} />
               </div>
             </div>
 
@@ -506,20 +424,20 @@ export default function Home() {
               {/* Funcionários */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Funcionários</h2>
-                <SmartPieChart data={funcionariosData} colors={COLORS_MIXED} maxCategoriesInChart={2} />
+                <SmartChart data={funcionariosData} colors={COLORS} />
               </div>
 
               {/* Família */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Composição Familiar (Crianças e Adolescentes)</h2>
-                <SmartPieChart data={familiaData} colors={COLORS_MIXED} maxCategoriesInChart={2} />
+                <SmartChart data={familiaData} colors={COLORS} />
               </div>
             </div>
 
             {/* MEI */}
             <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm mb-8">
               <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Cadastro MEI</h2>
-              <SmartPieChart data={meiData} colors={COLORS_MIXED} maxCategoriesInChart={2} />
+              <SmartChart data={meiData} colors={COLORS} />
             </div>
           </>
         )}
@@ -546,15 +464,17 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="bg-white border-2 border-[#1B7D3F] rounded-lg p-6 shadow-sm col-span-2">
-                <p className="text-gray-600 text-sm font-medium mb-2">Distribuição por Gênero</p>
-                <div className="flex gap-4">
-                  {generoConjugeData.map((item, idx) => (
-                    <div key={idx} className="flex-1">
-                      <p className="text-2xl font-bold text-[#1B7D3F]">{item.value}</p>
-                      <p className="text-xs text-gray-600">{item.name}</p>
-                    </div>
-                  ))}
+              <div className="bg-white border-2 border-[#1B7D3F] rounded-lg p-6 shadow-sm">
+                <div>
+                  <p className="text-gray-600 text-sm font-medium">Sem Cônjuge</p>
+                  <p className="text-3xl font-bold text-[#1B7D3F] mt-2">{data.total_comerciantes - conjugeData.total_conjuge}</p>
+                </div>
+              </div>
+
+              <div className="bg-white border-2 border-[#FFD700] rounded-lg p-6 shadow-sm">
+                <div>
+                  <p className="text-gray-600 text-sm font-medium">Percentual sem Cônjuge</p>
+                  <p className="text-3xl font-bold text-[#1B7D3F] mt-2">{(((data.total_comerciantes - conjugeData.total_conjuge) / data.total_comerciantes) * 100).toFixed(1)}%</p>
                 </div>
               </div>
             </div>
@@ -564,13 +484,13 @@ export default function Home() {
               {/* Gênero Cônjuge */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Gênero</h2>
-                <SmartPieChart data={generoConjugeData} colors={COLORS_MIXED} maxCategoriesInChart={2} />
+                <SmartChart data={generoConjugeData} colors={COLORS} />
               </div>
 
               {/* Etnia Cônjuge */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Etnia</h2>
-                <SmartPieChart data={etniaConjugeData} colors={COLORS_MIXED} maxCategoriesInChart={2} />
+                <SmartChart data={etniaConjugeData} colors={COLORS} />
               </div>
             </div>
 
