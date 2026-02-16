@@ -9,9 +9,10 @@ interface SmartChartProps {
   data: ChartData[];
   colors: string[];
   title?: string;
+  barColor?: string;
 }
 
-export default function SmartChart({ data, colors }: SmartChartProps) {
+export default function SmartChart({ data, colors, barColor }: SmartChartProps) {
   const total = data.reduce((sum, item) => sum + item.value, 0);
   
   // Se temos 3 ou menos categorias, usar gráfico de pizza
@@ -55,9 +56,9 @@ export default function SmartChart({ data, colors }: SmartChartProps) {
     );
   };
 
-  // Função para obter cor com "Não informado" em cinza
+  // Função para obter cor com "NI" em cinza
   const getColor = (index: number, name: string) => {
-    if (name.toLowerCase().includes('não informado')) {
+    if (name === 'NI') {
       return '#999999'; // Cinza
     }
     return colors[index % colors.length];
@@ -105,14 +106,10 @@ export default function SmartChart({ data, colors }: SmartChartProps) {
             <Tooltip content={<CustomTooltip />} />
             <Bar 
               dataKey="value" 
-              fill={colors[0]}
+              fill={barColor || colors[0]}
               radius={[8, 8, 0, 0]}
               label={{ position: 'top', fill: '#000000', fontSize: 12, fontWeight: 500 }}
-            >
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={getColor(index, entry.name)} />
-              ))}
-            </Bar>
+            />
           </BarChart>
         </ResponsiveContainer>
       )}
@@ -126,13 +123,7 @@ export default function SmartChart({ data, colors }: SmartChartProps) {
               return (
                 <tr key={index} className="border-b border-gray-200 hover:bg-gray-50">
                   <td className="py-1 px-2">
-                    <div className="flex items-center gap-1">
-                      <div 
-                        className="w-3 h-3 rounded" 
-                        style={{ backgroundColor: getColor(index, item.name) }}
-                      ></div>
-                      <span className="text-black font-medium text-xs">{item.name}</span>
-                    </div>
+                    <span className="text-black font-medium text-xs">{item.name}</span>
                   </td>
                   <td className="py-1 px-2 text-right text-black font-medium text-xs">{item.value}</td>
                   <td className="py-1 px-2 text-right text-gray-600 text-xs">{percentage}%</td>

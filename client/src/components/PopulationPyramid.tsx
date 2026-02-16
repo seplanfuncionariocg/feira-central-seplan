@@ -46,7 +46,7 @@ export default function PopulationPyramid({ data, naoInformado = 0 }: Population
         </div>
         {naoInformado > 0 && (
           <div className="text-sm text-black font-medium">
-            Não informado: {naoInformado}
+            NI: {naoInformado}
           </div>
         )}
       </div>
@@ -67,10 +67,6 @@ export default function PopulationPyramid({ data, naoInformado = 0 }: Population
             stroke="#000000"
           />
           <Tooltip content={<CustomTooltip />} />
-          <Legend 
-            wrapperStyle={{ paddingTop: '20px' }}
-            iconType="square"
-          />
           <Bar 
             dataKey="masculino" 
             name="Masculino"

@@ -3,6 +3,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import { Users, TrendingUp, HomeIcon, Briefcase } from 'lucide-react';
 import PopulationPyramid from '@/components/PopulationPyramid';
 import SmartChart from '@/components/SmartChart';
+import EscolaridadeChart from '@/components/EscolaridadeChart';
 
 interface DashboardData {
   total_comerciantes: number;
@@ -118,13 +119,56 @@ export default function Home() {
     return nome;
   };
 
-  const generoData = toChartData(data.genero);
-  const etniaData = toChartData(data.etnia);
-  const escolaridadeData = toChartData(data.escolaridade);
-  const estadoCivilData = toChartData(data.estado_civil);
-  const moradiaData = toChartData(data.moradia);
-  const habitacaoData = toChartData(data.habitacao);
-  const ocupacaoEstabelecimentoData = toChartData(data.ocupacao_estabelecimento);
+  // Normalizar "Não informado" para "NI"
+  const normalizarChave = (chave: string) => {
+    return chave.replace(/Não informado/gi, 'NI');
+  };
+
+  const generoData = toChartData(data.genero).map(item => ({
+    ...item,
+    name: normalizarChave(item.name)
+  }));
+  const etniaData = toChartData(data.etnia).map(item => ({
+    ...item,
+    name: normalizarChave(item.name)
+  }));
+  
+  // Escolaridade com números
+  const escolaridadeMap: Record<string, number> = {
+    'Ensino Fundamental Incompleto': 1,
+    'Ensino Fundamental Completo': 2,
+    'Ensino Médio Incompleto': 3,
+    'Ensino Médio Completo': 4,
+    'Ensino Superior Incompleto': 5,
+    'Ensino Superior Completo': 6,
+    'Não informado': 7,
+    'NI': 7
+  };
+  
+  const escolaridadeData = toChartData(data.escolaridade)
+    .map(item => ({
+      name: item.name,
+      value: item.value,
+      numero: escolaridadeMap[item.name] || 0
+    }))
+    .sort((a, b) => a.numero - b.numero);
+  
+  const estadoCivilData = toChartData(data.estado_civil).map(item => ({
+    ...item,
+    name: normalizarChave(item.name)
+  }));
+  const moradiaData = toChartData(data.moradia).map(item => ({
+    ...item,
+    name: normalizarChave(item.name)
+  }));
+  const habitacaoData = toChartData(data.habitacao).map(item => ({
+    ...item,
+    name: normalizarChave(item.name)
+  }));
+  const ocupacaoEstabelecimentoData = toChartData(data.ocupacao_estabelecimento).map(item => ({
+    ...item,
+    name: normalizarChave(item.name)
+  }));
   
   const cidadeData = Object.entries(data.cidade)
     .map(([name, value]) => ({ name: normalizarCidade(name), value }))
@@ -139,20 +183,41 @@ export default function Home() {
     }, [])
     .slice(0, 10);
   
-  const fontesRendaData = toChartData(data.fontes_renda);
-  const beneficiosData = toChartData(data.beneficios_governo);
-  const infraestruturaData = toChartData(data.infraestrutura);
+  const fontesRendaData = toChartData(data.fontes_renda).map(item => ({
+    ...item,
+    name: normalizarChave(item.name)
+  }));
+  const beneficiosData = toChartData(data.beneficios_governo).map(item => ({
+    ...item,
+    name: normalizarChave(item.name)
+  }));
+  const infraestruturaData = toChartData(data.infraestrutura).map(item => ({
+    ...item,
+    name: normalizarChave(item.name)
+  }));
   const equipamentosData = toChartData(data.equipamentos).slice(0, 15);
   const tipoMercadoriaData = toChartData(data.tipo_mercadoria).slice(0, 12);
-  const estruturaComercioData = toChartData(data.estrutura_comercio);
+  const estruturaComercioData = toChartData(data.estrutura_comercio).map(item => ({
+    ...item,
+    name: normalizarChave(item.name)
+  }));
   const funcionariosData = toChartData(
     Object.fromEntries(
       Object.entries(data.funcionarios as Record<string, number | string>)
         .filter(([key]) => key !== 'Média de funcionários')
     ) as Record<string, number>
-  );
-  const familiaData = toChartData(data.familia);
-  const meiData = toChartData(data.mei);
+  ).map(item => ({
+    ...item,
+    name: normalizarChave(item.name)
+  }));
+  const familiaData = toChartData(data.familia).map(item => ({
+    ...item,
+    name: normalizarChave(item.name)
+  }));
+  const meiData = toChartData(data.mei).map(item => ({
+    ...item,
+    name: normalizarChave(item.name)
+  }));
 
   // Dados de cônjuge
   const generoConjugeData = conjugeData ? toChartData(conjugeData.genero) : [];
@@ -175,9 +240,9 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="bg-[#1B7D3F] text-white py-6 px-4 shadow-md">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-bold mb-2">Dashboard Feira Central</h1>
-          <p className="text-green-100">Pesquisa Completa com Comerciantes de Campina Grande</p>
+        <div className="max-w-7xl mx-auto text-center">
+          <h1 className="text-4xl font-bold text-white mb-2">Pesquisa Comerciantes Feira Central</h1>
+          <p className="text-white">Pesquisa Completa com Comerciantes de Campina Grande</p>
         </div>
       </header>
 
@@ -285,7 +350,7 @@ export default function Home() {
 
             {/* Pirâmide Etária */}
             <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm mb-8">
-              <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Faixa Etária (Pirâmide Populacional)</h2>
+              <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Faixa Etária</h2>
               <PopulationPyramid data={piramideData.piramide} naoInformado={piramideData.nao_informado} />
             </div>
 
@@ -300,7 +365,7 @@ export default function Home() {
               {/* Escolaridade */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Escolaridade</h2>
-                <SmartChart data={escolaridadeData} colors={COLORS} />
+                <EscolaridadeChart data={escolaridadeData} />
               </div>
             </div>
 
@@ -522,18 +587,18 @@ export default function Home() {
 
             {/* Pirâmide Etária Cônjuge */}
             <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm mb-8">
-              <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Faixa Etária (Pirâmide Populacional)</h2>
+              <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Faixa Etária</h2>
               <PopulationPyramid data={piramideConjuge.piramide} naoInformado={piramideConjuge.nao_informado} />
             </div>
           </>
         )}
 
         {/* Rodapé */}
-        <div className="bg-[#1B7D3F] text-white rounded-lg p-6 text-center">
-          <p className="text-sm">Dashboard Feira Central - Pesquisa Completa com Comerciantes de Campina Grande</p>
-          <p className="text-xs text-green-100 mt-2">ETL Robusto | Limpeza de Dados | Análise Completa</p>
-          <p className="text-xs text-green-100 mt-3">Desenvolvido por Matias 2026</p>
-        </div>
+        <footer className="bg-gray-100 border-t border-gray-200 py-8 text-center text-gray-600 text-sm">
+          <p className="mb-2">Pesquisa Completa com Comerciantes de Campina Grande</p>
+          <p className="text-xs">Gerência de Desenvolvimento de Informações - GDI</p>
+          <p className="text-xs mt-3">Desenvolvido por A. Matias, 2026</p>
+        </footer>
       </main>
     </div>
   );
