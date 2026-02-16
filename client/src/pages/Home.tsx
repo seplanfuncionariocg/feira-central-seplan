@@ -54,8 +54,9 @@ export default function Home() {
       fetch('/dashboard_data.json').then(res => res.json()),
       fetch('/piramide_etaria.json').then(res => res.json()),
       fetch('/dashboard_data_conjuge.json').then(res => res.json()),
-      fetch('/piramide_etaria_conjuge.json').then(res => res.json())
-    ]).then(([dashData, pirData, conjData, pirConjData]) => {
+      fetch('/piramide_etaria_conjuge.json').then(res => res.json()),
+      fetch('/possui_conjuge.json').then(res => res.json())
+    ]).then(([dashData, pirData, conjData, pirConjData, possuiConjData]) => {
       setData(dashData);
       setPiramideData(pirData);
       setConjugeData(conjData);
@@ -128,6 +129,14 @@ export default function Home() {
   const cidadeData = Object.entries(data.cidade)
     .map(([name, value]) => ({ name: normalizarCidade(name), value }))
     .sort((a, b) => b.value - a.value)
+    .reduce((acc: any[], curr) => {
+      // Remover duplicatas mantendo o maior valor
+      const existing = acc.find(item => item.name === curr.name);
+      if (!existing) {
+        acc.push(curr);
+      }
+      return acc;
+    }, [])
     .slice(0, 10);
   
   const fontesRendaData = toChartData(data.fontes_renda);
@@ -136,7 +145,12 @@ export default function Home() {
   const equipamentosData = toChartData(data.equipamentos).slice(0, 15);
   const tipoMercadoriaData = toChartData(data.tipo_mercadoria).slice(0, 12);
   const estruturaComercioData = toChartData(data.estrutura_comercio);
-  const funcionariosData = toChartData(data.funcionarios as Record<string, number>);
+  const funcionariosData = toChartData(
+    Object.fromEntries(
+      Object.entries(data.funcionarios as Record<string, number | string>)
+        .filter(([key]) => key !== 'Média de funcionários')
+    ) as Record<string, number>
+  );
   const familiaData = toChartData(data.familia);
   const meiData = toChartData(data.mei);
 
@@ -250,11 +264,23 @@ export default function Home() {
                 <SmartChart data={generoData} colors={COLORS} />
               </div>
 
+              {/* Possui Cônjuge */}
+              <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Possui Cônjuge/Companheiro</h2>
+                <SmartChart data={toChartData({ 'Sim': 501, 'Não': 348, 'Não informado': 10 })} colors={COLORS} />
+              </div>
+            </div>
+
+            {/* Gráficos - Linha 1.5 */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
               {/* Etnia */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Etnia</h2>
                 <SmartChart data={etniaData} colors={COLORS} />
               </div>
+
+              {/* Placeholder */}
+              <div></div>
             </div>
 
             {/* Pirâmide Etária */}

@@ -55,6 +55,14 @@ export default function SmartChart({ data, colors }: SmartChartProps) {
     );
   };
 
+  // Função para obter cor com "Não informado" em cinza
+  const getColor = (index: number, name: string) => {
+    if (name.toLowerCase().includes('não informado')) {
+      return '#999999'; // Cinza
+    }
+    return colors[index % colors.length];
+  };
+
   return (
     <div className="w-full">
       {usePie ? (
@@ -73,7 +81,7 @@ export default function SmartChart({ data, colors }: SmartChartProps) {
                 dataKey="value"
               >
                 {data.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                  <Cell key={`cell-${index}`} fill={getColor(index, entry.name)} />
                 ))}
               </Pie>
               <Tooltip content={<CustomTooltip />} />
@@ -102,7 +110,7 @@ export default function SmartChart({ data, colors }: SmartChartProps) {
               label={{ position: 'top', fill: '#000000', fontSize: 12, fontWeight: 500 }}
             >
               {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                <Cell key={`cell-${index}`} fill={getColor(index, entry.name)} />
               ))}
             </Bar>
           </BarChart>
@@ -111,30 +119,30 @@ export default function SmartChart({ data, colors }: SmartChartProps) {
 
       {/* Legenda em formato de tabela */}
       <div className="mt-6 overflow-x-auto">
-        <table className="w-full text-sm border-collapse">
+        <table className="w-full text-xs border-collapse">
           <tbody>
             {data.map((item, index) => {
               const percentage = ((item.value / total) * 100).toFixed(1);
               return (
                 <tr key={index} className="border-b border-gray-200 hover:bg-gray-50">
-                  <td className="py-2 px-3">
-                    <div className="flex items-center gap-2">
+                  <td className="py-1 px-2">
+                    <div className="flex items-center gap-1">
                       <div 
-                        className="w-4 h-4 rounded" 
-                        style={{ backgroundColor: colors[index % colors.length] }}
+                        className="w-3 h-3 rounded" 
+                        style={{ backgroundColor: getColor(index, item.name) }}
                       ></div>
-                      <span className="text-black font-medium">{item.name}</span>
+                      <span className="text-black font-medium text-xs">{item.name}</span>
                     </div>
                   </td>
-                  <td className="py-2 px-3 text-right text-black font-medium">{item.value}</td>
-                  <td className="py-2 px-3 text-right text-gray-600">{percentage}%</td>
+                  <td className="py-1 px-2 text-right text-black font-medium text-xs">{item.value}</td>
+                  <td className="py-1 px-2 text-right text-gray-600 text-xs">{percentage}%</td>
                 </tr>
               );
             })}
             <tr className="bg-gray-50 font-semibold">
-              <td className="py-2 px-3 text-black">Total</td>
-              <td className="py-2 px-3 text-right text-black">{total}</td>
-              <td className="py-2 px-3 text-right text-black">100%</td>
+              <td className="py-1 px-2 text-black text-xs">Total</td>
+              <td className="py-1 px-2 text-right text-black text-xs">{total}</td>
+              <td className="py-1 px-2 text-right text-black text-xs">100%</td>
             </tr>
           </tbody>
         </table>
