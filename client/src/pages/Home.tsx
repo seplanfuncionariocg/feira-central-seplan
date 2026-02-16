@@ -42,13 +42,23 @@ interface ConjugeData {
   etnia: Record<string, number>;
 }
 
+interface TabelaRow {
+  'Disponibilidade do Comerciante': string;
+  'Número da Selagem': string;
+  'Gênero': string;
+  'Etnia / Cor': string;
+  'Renda Média Mensal do Feirante': string;
+}
+
 export default function Home() {
   const [data, setData] = useState<DashboardData | null>(null);
   const [piramideData, setPiramideData] = useState<PiramideData | null>(null);
   const [conjugeData, setConjugeData] = useState<ConjugeData | null>(null);
   const [piramideConjuge, setPiramideConjuge] = useState<PiramideData | null>(null);
+  const [disponibilidade, setDisponibilidade] = useState<Record<string, number> | null>(null);
+  const [tabelaDados, setTabelaDados] = useState<TabelaRow[] | null>(null);
   const [loading, setLoading] = useState(true);
-  const [aba, setAba] = useState<'titular' | 'conjuge'>('titular');
+  const [aba, setAba] = useState<'titular' | 'conjuge' | 'tabela'>('titular');
 
   useEffect(() => {
     Promise.all([
@@ -56,12 +66,16 @@ export default function Home() {
       fetch('/piramide_etaria.json').then(res => res.json()),
       fetch('/dashboard_data_conjuge.json').then(res => res.json()),
       fetch('/piramide_etaria_conjuge.json').then(res => res.json()),
-      fetch('/possui_conjuge.json').then(res => res.json())
-    ]).then(([dashData, pirData, conjData, pirConjData, possuiConjData]) => {
+      fetch('/possui_conjuge.json').then(res => res.json()),
+      fetch('/disponibilidade.json').then(res => res.json()),
+      fetch('/tabela_dados_tratados.json').then(res => res.json())
+    ]).then(([dashData, pirData, conjData, pirConjData, possuiConjData, dispData, tabelaData]) => {
       setData(dashData);
       setPiramideData(pirData);
       setConjugeData(conjData);
       setPiramideConjuge(pirConjData);
+      setDisponibilidade(dispData);
+      setTabelaDados(tabelaData);
       setLoading(false);
     }).catch(err => {
       console.error('Erro ao carregar dados:', err);
@@ -252,23 +266,33 @@ export default function Home() {
           <div className="flex gap-8">
             <button
               onClick={() => setAba('titular')}
-              className={`py-4 px-6 font-semibold border-b-2 transition-colors ${
+              className={`px-4 py-2 font-semibold border-b-2 transition ${
                 aba === 'titular'
                   ? 'border-[#1B7D3F] text-[#1B7D3F]'
                   : 'border-transparent text-gray-600 hover:text-gray-800'
               }`}
             >
-              Titular do Imóvel ({data.total_comerciantes})
+              Titular do Imóvel ({data?.total_comerciantes || 0})
             </button>
             <button
               onClick={() => setAba('conjuge')}
-              className={`py-4 px-6 font-semibold border-b-2 transition-colors ${
+              className={`px-4 py-2 font-semibold border-b-2 transition ${
                 aba === 'conjuge'
                   ? 'border-[#1B7D3F] text-[#1B7D3F]'
                   : 'border-transparent text-gray-600 hover:text-gray-800'
               }`}
             >
               Cônjuge/Companheiro ({conjugeData?.total_conjuge || 0})
+            </button>
+            <button
+              onClick={() => setAba('tabela')}
+              className={`px-4 py-2 font-semibold border-b-2 transition ${
+                aba === 'tabela'
+                  ? 'border-[#1B7D3F] text-[#1B7D3F]'
+                  : 'border-transparent text-gray-600 hover:text-gray-800'
+              }`}
+            >
+              Tabela de Dados
             </button>
           </div>
         </div>
@@ -334,6 +358,15 @@ export default function Home() {
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Possui Cônjuge/Companheiro</h2>
                 <SmartChart data={toChartData({ 'Sim': 501, 'Não': 348, 'NI': 10 })} colors={COLORS} barColor="#FFD700" />
               </div>
+            </div>
+
+            {/* Disponibilidade */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+              <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Disponibilidade do Comerciante</h2>
+                {disponibilidade && <SmartChart data={toChartData(disponibilidade)} colors={COLORS} barColor="#1B7D3F" />}
+              </div>
+              <div></div>
             </div>
 
             {/* Gráficos - Linha 1.5 */}
@@ -589,6 +622,40 @@ export default function Home() {
             <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm mb-8">
               <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Faixa Etária</h2>
               <PopulationPyramid data={piramideConjuge.piramide} naoInformado={piramideConjuge.nao_informado} />
+            </div>
+          </>
+        )}
+
+        {/* ABA TABELA */}
+        {aba === 'tabela' && (
+          <>
+            <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm mb-8">
+              <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Tabela de Dados Tratados</h2>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm border-collapse">
+                  <thead>
+                    <tr className="bg-[#1B7D3F] text-white">
+                      <th className="border border-gray-300 px-4 py-2 text-left">Disponibilidade</th>
+                      <th className="border border-gray-300 px-4 py-2 text-left">Número da Selagem</th>
+                      <th className="border border-gray-300 px-4 py-2 text-left">Gênero</th>
+                      <th className="border border-gray-300 px-4 py-2 text-left">Etnia</th>
+                      <th className="border border-gray-300 px-4 py-2 text-left">Renda Média Mensal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {tabelaDados && tabelaDados.map((row, idx) => (
+                      <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                        <td className="border border-gray-300 px-4 py-2">{row['Disponibilidade do Comerciante']}</td>
+                        <td className="border border-gray-300 px-4 py-2">{row['Número da Selagem']}</td>
+                        <td className="border border-gray-300 px-4 py-2">{row['Gênero']}</td>
+                        <td className="border border-gray-300 px-4 py-2">{row['Etnia / Cor']}</td>
+                        <td className="border border-gray-300 px-4 py-2">{row['Renda Média Mensal do Feirante']}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-gray-600 text-sm mt-4">Total de registros: {tabelaDados?.length || 0}</p>
             </div>
           </>
         )}
