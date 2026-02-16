@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Users, TrendingUp, HomeIcon, Briefcase } from 'lucide-react';
 import PopulationPyramid from '@/components/PopulationPyramid';
+import SmartPieChart from '@/components/SmartPieChart';
 
 interface DashboardData {
   total_comerciantes: number;
@@ -183,22 +184,13 @@ export default function Home() {
           {/* Gênero */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Gênero</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie data={generoData} cx="50%" cy="50%" labelLine={false} label={({ name, value }) => `${name}: ${value}`} outerRadius={100} fill="#1B7D3F" dataKey="value">
-                  {generoData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip content={<CustomTooltip />} />
-              </PieChart>
-            </ResponsiveContainer>
+            <SmartPieChart data={generoData} colors={COLORS} />
           </div>
 
           {/* Etnia */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Etnia</h2>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={350}>
               <BarChart data={etniaData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
                 <XAxis 
@@ -211,7 +203,12 @@ export default function Home() {
                 />
                 <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
                 <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="value" fill="#1B7D3F" radius={[8, 8, 0, 0]} />
+                <Bar 
+                  dataKey="value" 
+                  fill="#1B7D3F" 
+                  radius={[8, 8, 0, 0]}
+                  label={{ position: 'top', fill: '#000000', fontSize: 12, fontWeight: 500 }}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -228,28 +225,24 @@ export default function Home() {
           {/* Estado Civil */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Estado Civil</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie data={estadoCivilData} cx="50%" cy="50%" labelLine={false} label={({ name, value }) => `${name}: ${value}`} outerRadius={100} fill="#1B7D3F" dataKey="value">
-                  {estadoCivilData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip content={<CustomTooltip />} />
-              </PieChart>
-            </ResponsiveContainer>
+            <SmartPieChart data={estadoCivilData} colors={COLORS} />
           </div>
 
           {/* Escolaridade */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Escolaridade</h2>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={350}>
               <BarChart data={escolaridadeData} layout="vertical" margin={{ top: 5, right: 30, left: 200, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
                 <XAxis type="number" tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
                 <YAxis dataKey="name" type="category" width={190} tick={{ fill: '#000000', fontSize: 11, fontWeight: 500 }} />
                 <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="value" fill="#156B32" radius={[0, 8, 8, 0]} />
+                <Bar 
+                  dataKey="value" 
+                  fill="#156B32" 
+                  radius={[0, 8, 8, 0]}
+                  label={{ position: 'right', fill: '#000000', fontSize: 12, fontWeight: 500 }}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -260,22 +253,13 @@ export default function Home() {
           {/* Moradia */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Forma de Ocupação de Moradia</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie data={moradiaData} cx="50%" cy="50%" labelLine={false} label={({ name, value }) => `${name}: ${value}`} outerRadius={100} fill="#1B7D3F" dataKey="value">
-                  {moradiaData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip content={<CustomTooltip />} />
-              </PieChart>
-            </ResponsiveContainer>
+            <SmartPieChart data={moradiaData} colors={COLORS} />
           </div>
 
           {/* Habitação */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Condição da Habitação</h2>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={350}>
               <BarChart data={habitacaoData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
                 <XAxis 
@@ -288,7 +272,12 @@ export default function Home() {
                 />
                 <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
                 <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="value" fill="#FFD700" radius={[8, 8, 0, 0]} />
+                <Bar 
+                  dataKey="value" 
+                  fill="#FFD700" 
+                  radius={[8, 8, 0, 0]}
+                  label={{ position: 'top', fill: '#000000', fontSize: 12, fontWeight: 500 }}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -299,7 +288,7 @@ export default function Home() {
           {/* Ocupação Estabelecimento */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Forma de Ocupação do Estabelecimento</h2>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={350}>
               <BarChart data={ocupacaoEstabelecimentoData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
                 <XAxis 
@@ -312,7 +301,12 @@ export default function Home() {
                 />
                 <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
                 <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="value" fill="#1B7D3F" radius={[8, 8, 0, 0]} />
+                <Bar 
+                  dataKey="value" 
+                  fill="#1B7D3F" 
+                  radius={[8, 8, 0, 0]}
+                  label={{ position: 'top', fill: '#000000', fontSize: 12, fontWeight: 500 }}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -320,7 +314,7 @@ export default function Home() {
           {/* Top 10 Cidades */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Top 10 Cidades com Mais Comerciantes</h2>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={350}>
               <BarChart data={cidadeData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
                 <XAxis 
@@ -333,7 +327,12 @@ export default function Home() {
                 />
                 <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
                 <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="value" fill="#156B32" radius={[8, 8, 0, 0]} />
+                <Bar 
+                  dataKey="value" 
+                  fill="#156B32" 
+                  radius={[8, 8, 0, 0]}
+                  label={{ position: 'top', fill: '#000000', fontSize: 12, fontWeight: 500 }}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -344,22 +343,13 @@ export default function Home() {
           {/* Fontes de Renda */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Fontes de Renda</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie data={fontesRendaData} cx="50%" cy="50%" labelLine={false} label={({ name, value }) => `${name}: ${value}`} outerRadius={100} fill="#1B7D3F" dataKey="value">
-                  {fontesRendaData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip content={<CustomTooltip />} />
-              </PieChart>
-            </ResponsiveContainer>
+            <SmartPieChart data={fontesRendaData} colors={COLORS} />
           </div>
 
           {/* Benefícios do Governo */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Benefícios do Governo</h2>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={350}>
               <BarChart data={beneficiosData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
                 <XAxis 
@@ -372,7 +362,12 @@ export default function Home() {
                 />
                 <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
                 <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="value" fill="#FFD700" radius={[8, 8, 0, 0]} />
+                <Bar 
+                  dataKey="value" 
+                  fill="#FFD700" 
+                  radius={[8, 8, 0, 0]}
+                  label={{ position: 'top', fill: '#000000', fontSize: 12, fontWeight: 500 }}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -383,13 +378,18 @@ export default function Home() {
           {/* Infraestrutura */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Infraestrutura dos Estabelecimentos</h2>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={350}>
               <BarChart data={infraestruturaData} layout="vertical" margin={{ top: 5, right: 30, left: 200, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
                 <XAxis type="number" tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
                 <YAxis dataKey="name" type="category" width={190} tick={{ fill: '#000000', fontSize: 11, fontWeight: 500 }} />
                 <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="value" fill="#1B7D3F" radius={[0, 8, 8, 0]} />
+                <Bar 
+                  dataKey="value" 
+                  fill="#1B7D3F" 
+                  radius={[0, 8, 8, 0]}
+                  label={{ position: 'right', fill: '#000000', fontSize: 12, fontWeight: 500 }}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -397,13 +397,18 @@ export default function Home() {
           {/* Top 15 Equipamentos */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Top 15 Equipamentos</h2>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={350}>
               <BarChart data={equipamentosData} layout="vertical" margin={{ top: 5, right: 30, left: 150, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
                 <XAxis type="number" tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
                 <YAxis dataKey="name" type="category" width={140} tick={{ fill: '#000000', fontSize: 10, fontWeight: 500 }} />
                 <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="value" fill="#156B32" radius={[0, 8, 8, 0]} />
+                <Bar 
+                  dataKey="value" 
+                  fill="#156B32" 
+                  radius={[0, 8, 8, 0]}
+                  label={{ position: 'right', fill: '#000000', fontSize: 12, fontWeight: 500 }}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -414,7 +419,7 @@ export default function Home() {
           {/* Tipo de Mercadoria */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Top 12 Tipos de Mercadoria</h2>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={350}>
               <BarChart data={tipoMercadoriaData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
                 <XAxis 
@@ -427,7 +432,12 @@ export default function Home() {
                 />
                 <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
                 <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="value" fill="#FFD700" radius={[8, 8, 0, 0]} />
+                <Bar 
+                  dataKey="value" 
+                  fill="#FFD700" 
+                  radius={[8, 8, 0, 0]}
+                  label={{ position: 'top', fill: '#000000', fontSize: 12, fontWeight: 500 }}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -435,16 +445,7 @@ export default function Home() {
           {/* Estrutura do Comércio */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Estrutura do Comércio</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie data={estruturaComercioData} cx="50%" cy="50%" labelLine={false} label={({ name, value }) => `${name}: ${value}`} outerRadius={100} fill="#1B7D3F" dataKey="value">
-                  {estruturaComercioData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip content={<CustomTooltip />} />
-              </PieChart>
-            </ResponsiveContainer>
+            <SmartPieChart data={estruturaComercioData} colors={COLORS} />
           </div>
         </div>
 
@@ -453,53 +454,27 @@ export default function Home() {
           {/* Funcionários */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Funcionários</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie data={funcionariosData} cx="50%" cy="50%" labelLine={false} label={({ name, value }) => `${name}: ${value}`} outerRadius={100} fill="#1B7D3F" dataKey="value">
-                  {funcionariosData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip content={<CustomTooltip />} />
-              </PieChart>
-            </ResponsiveContainer>
+            <SmartPieChart data={funcionariosData} colors={COLORS} />
           </div>
 
           {/* Família */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Composição Familiar (Crianças e Adolescentes)</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie data={familiaData} cx="50%" cy="50%" labelLine={false} label={({ name, value }) => `${name}: ${value}`} outerRadius={100} fill="#1B7D3F" dataKey="value">
-                  {familiaData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip content={<CustomTooltip />} />
-              </PieChart>
-            </ResponsiveContainer>
+            <SmartPieChart data={familiaData} colors={COLORS} />
           </div>
         </div>
 
         {/* MEI */}
         <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm mb-8">
           <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Cadastro MEI</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              <Pie data={meiData} cx="50%" cy="50%" labelLine={false} label={({ name, value }) => `${name}: ${value}`} outerRadius={100} fill="#1B7D3F" dataKey="value">
-                {meiData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip content={<CustomTooltip />} />
-            </PieChart>
-          </ResponsiveContainer>
+          <SmartPieChart data={meiData} colors={COLORS} />
         </div>
 
         {/* Rodapé */}
         <div className="bg-[#1B7D3F] text-white rounded-lg p-6 text-center">
           <p className="text-sm">Dashboard Feira Central - Pesquisa Completa com Comerciantes de Campina Grande</p>
           <p className="text-xs text-green-100 mt-2">ETL Robusto | Limpeza de Dados | Análise Completa</p>
+          <p className="text-xs text-green-100 mt-3">Desenvolvido por Matias 2026</p>
         </div>
       </main>
     </div>
