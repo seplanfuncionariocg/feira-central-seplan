@@ -326,13 +326,13 @@ export default function Home() {
               {/* Gênero */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Gênero</h2>
-                <SmartChart data={generoData} colors={COLORS} />
+                <SmartChart data={generoData} colors={COLORS} barColor="#1B7D3F" />
               </div>
 
               {/* Possui Cônjuge */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Possui Cônjuge/Companheiro</h2>
-                <SmartChart data={toChartData({ 'Sim': 501, 'Não': 348, 'Não informado': 10 })} colors={COLORS} />
+                <SmartChart data={toChartData({ 'Sim': 501, 'Não': 348, 'NI': 10 })} colors={COLORS} barColor="#FFD700" />
               </div>
             </div>
 
@@ -341,7 +341,7 @@ export default function Home() {
               {/* Etnia */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Etnia</h2>
-                <SmartChart data={etniaData} colors={COLORS} />
+                <SmartChart data={etniaData} colors={COLORS} barColor="#FFD700" />
               </div>
 
               {/* Placeholder */}
@@ -359,7 +359,7 @@ export default function Home() {
               {/* Estado Civil */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Estado Civil</h2>
-                <SmartChart data={estadoCivilData} colors={COLORS} />
+                <SmartChart data={estadoCivilData} colors={COLORS} barColor="#1B7D3F" />
               </div>
 
               {/* Escolaridade */}
@@ -374,13 +374,13 @@ export default function Home() {
               {/* Moradia */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Forma de Ocupação de Moradia</h2>
-                <SmartChart data={moradiaData} colors={COLORS} />
+                <SmartChart data={moradiaData} colors={COLORS} barColor="#FFD700" />
               </div>
 
               {/* Habitação */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Condição da Habitação</h2>
-                <SmartChart data={habitacaoData} colors={COLORS} />
+                <SmartChart data={habitacaoData} colors={COLORS} barColor="#1B7D3F" />
               </div>
             </div>
 
@@ -389,7 +389,7 @@ export default function Home() {
               {/* Ocupação Estabelecimento */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Forma de Ocupação do Estabelecimento</h2>
-                <SmartChart data={ocupacaoEstabelecimentoData} colors={COLORS} />
+                <SmartChart data={ocupacaoEstabelecimentoData} colors={COLORS} barColor="#FFD700" />
               </div>
 
               {/* Top 10 Cidades */}
@@ -424,13 +424,13 @@ export default function Home() {
               {/* Fontes de Renda */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Fontes de Renda</h2>
-                <SmartChart data={fontesRendaData} colors={COLORS} />
+                <SmartChart data={fontesRendaData} colors={COLORS} barColor="#1B7D3F" />
               </div>
 
               {/* Benefícios do Governo */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Benefícios do Governo</h2>
-                <SmartChart data={beneficiosData} colors={COLORS} />
+                <SmartChart data={beneficiosData} colors={COLORS} barColor="#FFD700" />
               </div>
             </div>
 
@@ -506,7 +506,7 @@ export default function Home() {
               {/* Estrutura do Comércio */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Estrutura do Comércio</h2>
-                <SmartChart data={estruturaComercioData} colors={COLORS} />
+                <SmartChart data={estruturaComercioData} colors={COLORS} barColor="#FFD700" />
               </div>
             </div>
 
@@ -515,20 +515,20 @@ export default function Home() {
               {/* Funcionários */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Funcionários</h2>
-                <SmartChart data={funcionariosData} colors={COLORS} />
+                <SmartChart data={equipamentosData} colors={COLORS} barColor="#FFD700" />
               </div>
 
               {/* Família */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Composição Familiar (Crianças e Adolescentes)</h2>
-                <SmartChart data={familiaData} colors={COLORS} />
+                <SmartChart data={familiaData} colors={COLORS} barColor="#FFD700" />
               </div>
             </div>
 
             {/* MEI */}
             <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm mb-8">
               <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Cadastro MEI</h2>
-              <SmartChart data={meiData} colors={COLORS} />
+                <SmartChart data={meiData} colors={COLORS} barColor="#1B7D3F" />
             </div>
           </>
         )}
@@ -581,7 +581,7 @@ export default function Home() {
               {/* Etnia Cônjuge */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Etnia</h2>
-                <SmartChart data={etniaConjugeData} colors={COLORS} />
+                <SmartChart data={funcionariosData} colors={COLORS} barColor="#1B7D3F" />
               </div>
             </div>
 
@@ -594,8 +594,7 @@ export default function Home() {
         )}
 
         {/* Rodapé */}
-        <footer className="bg-gray-100 border-t border-gray-200 py-8 text-center text-gray-600 text-sm">
-          <p className="mb-2">Pesquisa Completa com Comerciantes de Campina Grande</p>
+        <footer className="bg-[#1B7D3F] border-t border-gray-200 py-8 text-center text-white text-sm">
           <p className="text-xs">Gerência de Desenvolvimento de Informações - GDI</p>
           <p className="text-xs mt-3">Desenvolvido por A. Matias, 2026</p>
         </footer>

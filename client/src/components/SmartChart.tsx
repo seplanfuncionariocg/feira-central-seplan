@@ -91,8 +91,8 @@ export default function SmartChart({ data, colors, barColor }: SmartChartProps) 
         </>
       ) : (
         // GRÁFICO DE BARRAS (para mais de 3 categorias)
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={data} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
+        <ResponsiveContainer width="100%" height={350}>
+          <BarChart data={data} margin={{ top: 30, right: 30, left: 0, bottom: 80 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
             <XAxis 
               dataKey="name" 
@@ -108,7 +108,7 @@ export default function SmartChart({ data, colors, barColor }: SmartChartProps) 
               dataKey="value" 
               fill={barColor || colors[0]}
               radius={[8, 8, 0, 0]}
-              label={{ position: 'top', fill: '#000000', fontSize: 12, fontWeight: 500 }}
+              label={{ position: 'top', fill: '#000000', fontSize: 11, fontWeight: 500 }}
             />
           </BarChart>
         </ResponsiveContainer>
