@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { BarChart, Bar, PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ScatterChart, Scatter } from 'recharts';
+import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Users, TrendingUp, HomeIcon, Briefcase } from 'lucide-react';
+import PopulationPyramid from '@/components/PopulationPyramid';
 
 interface DashboardData {
   total_comerciantes: number;
@@ -27,21 +28,28 @@ interface DashboardData {
   mei: Record<string, number>;
 }
 
+interface PiramideData {
+  piramide: Array<{ faixa: string; masculino: number; feminino: number }>;
+  nao_informado: number;
+}
+
 export default function Home() {
   const [data, setData] = useState<DashboardData | null>(null);
+  const [piramideData, setPiramideData] = useState<PiramideData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/dashboard_data.json')
-      .then(res => res.json())
-      .then(data => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Erro ao carregar dados:', err);
-        setLoading(false);
-      });
+    Promise.all([
+      fetch('/dashboard_data.json').then(res => res.json()),
+      fetch('/piramide_etaria.json').then(res => res.json())
+    ]).then(([dashData, pirData]) => {
+      setData(dashData);
+      setPiramideData(pirData);
+      setLoading(false);
+    }).catch(err => {
+      console.error('Erro ao carregar dados:', err);
+      setLoading(false);
+    });
   }, []);
 
   if (loading) {
@@ -55,7 +63,7 @@ export default function Home() {
     );
   }
 
-  if (!data) {
+  if (!data || !piramideData) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <p className="text-gray-600">Erro ao carregar dados</p>
@@ -65,19 +73,34 @@ export default function Home() {
 
   const COLORS = ['#1B7D3F', '#FFD700', '#156B32', '#FFC700', '#0F5C28', '#2D9B5F', '#FFE066', '#1A6B35'];
 
-  // Preparar dados para gráficos
-  const toChartData = (obj: Record<string, number>) => 
-    Object.entries(obj).map(([name, value]) => ({ name, value }));
+  // Função para converter para dados de gráfico e ordenar por valor
+  const toChartData = (obj: Record<string, number>, sort = true) => {
+    let result = Object.entries(obj).map(([name, value]) => ({ name, value }));
+    if (sort) {
+      result = result.sort((a, b) => b.value - a.value);
+    }
+    return result;
+  };
+
+  // Normalizar nomes de cidades (CG -> Campina Grande)
+  const normalizarCidade = (nome: string) => {
+    if (nome === 'Cg') return 'Campina Grande';
+    return nome;
+  };
 
   const generoData = toChartData(data.genero);
   const etniaData = toChartData(data.etnia);
-  const faixaEtariaData = toChartData(data.faixa_etaria);
   const escolaridadeData = toChartData(data.escolaridade);
   const estadoCivilData = toChartData(data.estado_civil);
   const moradiaData = toChartData(data.moradia);
   const habitacaoData = toChartData(data.habitacao);
   const ocupacaoEstabelecimentoData = toChartData(data.ocupacao_estabelecimento);
-  const cidadeData = toChartData(data.cidade).sort((a, b) => b.value - a.value).slice(0, 10);
+  
+  const cidadeData = Object.entries(data.cidade)
+    .map(([name, value]) => ({ name: normalizarCidade(name), value }))
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 10);
+  
   const fontesRendaData = toChartData(data.fontes_renda);
   const beneficiosData = toChartData(data.beneficios_governo);
   const infraestruturaData = toChartData(data.infraestrutura);
@@ -87,6 +110,19 @@ export default function Home() {
   const funcionariosData = toChartData(data.funcionarios as Record<string, number>);
   const familiaData = toChartData(data.familia);
   const meiData = toChartData(data.mei);
+
+  // Componente customizado para tooltip com texto preto
+  const CustomTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white p-2 border border-gray-300 rounded shadow-lg">
+          <p className="text-sm font-semibold text-black">{payload[0].payload.name}</p>
+          <p className="text-sm text-black font-medium">{payload[0].value}</p>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -154,7 +190,7 @@ export default function Home() {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
               </PieChart>
             </ResponsiveContainer>
           </div>
@@ -163,33 +199,32 @@ export default function Home() {
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Etnia</h2>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={etniaData}>
+              <BarChart data={etniaData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-                <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#1B7D3F" />
+                <XAxis 
+                  dataKey="name" 
+                  angle={-45} 
+                  textAnchor="end" 
+                  height={100}
+                  tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }}
+                  interval={0}
+                />
+                <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
+                <Tooltip content={<CustomTooltip />} />
+                <Bar dataKey="value" fill="#1B7D3F" radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
+        {/* Pirâmide Etária */}
+        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm mb-8">
+          <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Faixa Etária (Pirâmide Populacional)</h2>
+          <PopulationPyramid data={piramideData.piramide} naoInformado={piramideData.nao_informado} />
+        </div>
+
         {/* Gráficos - Linha 2 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* Faixa Etária */}
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Faixa Etária</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={faixaEtariaData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-                <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#FFD700" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-
           {/* Estado Civil */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Estado Civil</h2>
@@ -200,28 +235,28 @@ export default function Home() {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
               </PieChart>
             </ResponsiveContainer>
           </div>
-        </div>
 
-        {/* Gráficos - Linha 3 */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Escolaridade */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Escolaridade</h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={escolaridadeData} layout="vertical" margin={{ top: 5, right: 30, left: 200, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-                <XAxis type="number" />
-                <YAxis dataKey="name" type="category" width={190} />
-                <Tooltip />
-                <Bar dataKey="value" fill="#156B32" />
+                <XAxis type="number" tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
+                <YAxis dataKey="name" type="category" width={190} tick={{ fill: '#000000', fontSize: 11, fontWeight: 500 }} />
+                <Tooltip content={<CustomTooltip />} />
+                <Bar dataKey="value" fill="#156B32" radius={[0, 8, 8, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
+        </div>
 
+        {/* Gráficos - Linha 3 */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Moradia */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Forma de Ocupação de Moradia</h2>
@@ -232,38 +267,73 @@ export default function Home() {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
               </PieChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Habitação */}
+          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+            <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Condição da Habitação</h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={habitacaoData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
+                <XAxis 
+                  dataKey="name" 
+                  angle={-45} 
+                  textAnchor="end" 
+                  height={100}
+                  tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }}
+                  interval={0}
+                />
+                <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
+                <Tooltip content={<CustomTooltip />} />
+                <Bar dataKey="value" fill="#FFD700" radius={[8, 8, 0, 0]} />
+              </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* Gráficos - Linha 4 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* Habitação */}
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Condição da Habitação</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={habitacaoData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-                <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#FFD700" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-
           {/* Ocupação Estabelecimento */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Forma de Ocupação do Estabelecimento</h2>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={ocupacaoEstabelecimentoData}>
+              <BarChart data={ocupacaoEstabelecimentoData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-                <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#1B7D3F" />
+                <XAxis 
+                  dataKey="name" 
+                  angle={-45} 
+                  textAnchor="end" 
+                  height={100}
+                  tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }}
+                  interval={0}
+                />
+                <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
+                <Tooltip content={<CustomTooltip />} />
+                <Bar dataKey="value" fill="#1B7D3F" radius={[8, 8, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Top 10 Cidades */}
+          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+            <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Top 10 Cidades com Mais Comerciantes</h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={cidadeData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
+                <XAxis 
+                  dataKey="name" 
+                  angle={-45} 
+                  textAnchor="end" 
+                  height={100}
+                  tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }}
+                  interval={0}
+                />
+                <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
+                <Tooltip content={<CustomTooltip />} />
+                <Bar dataKey="value" fill="#156B32" radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -271,20 +341,6 @@ export default function Home() {
 
         {/* Gráficos - Linha 5 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* Top 10 Cidades */}
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Top 10 Cidades com Mais Comerciantes</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={cidadeData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-                <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#156B32" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-
           {/* Fontes de Renda */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Fontes de Renda</h2>
@@ -295,38 +351,59 @@ export default function Home() {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
               </PieChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Benefícios do Governo */}
+          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+            <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Benefícios do Governo</h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={beneficiosData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
+                <XAxis 
+                  dataKey="name" 
+                  angle={-45} 
+                  textAnchor="end" 
+                  height={100}
+                  tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }}
+                  interval={0}
+                />
+                <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
+                <Tooltip content={<CustomTooltip />} />
+                <Bar dataKey="value" fill="#FFD700" radius={[8, 8, 0, 0]} />
+              </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* Gráficos - Linha 6 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* Benefícios do Governo */}
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Benefícios do Governo</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={beneficiosData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-                <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#FFD700" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-
           {/* Infraestrutura */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Infraestrutura dos Estabelecimentos</h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={infraestruturaData} layout="vertical" margin={{ top: 5, right: 30, left: 200, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-                <XAxis type="number" />
-                <YAxis dataKey="name" type="category" width={190} />
-                <Tooltip />
-                <Bar dataKey="value" fill="#1B7D3F" />
+                <XAxis type="number" tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
+                <YAxis dataKey="name" type="category" width={190} tick={{ fill: '#000000', fontSize: 11, fontWeight: 500 }} />
+                <Tooltip content={<CustomTooltip />} />
+                <Bar dataKey="value" fill="#1B7D3F" radius={[0, 8, 8, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Top 15 Equipamentos */}
+          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+            <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Top 15 Equipamentos</h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={equipamentosData} layout="vertical" margin={{ top: 5, right: 30, left: 150, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
+                <XAxis type="number" tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
+                <YAxis dataKey="name" type="category" width={140} tick={{ fill: '#000000', fontSize: 10, fontWeight: 500 }} />
+                <Tooltip content={<CustomTooltip />} />
+                <Bar dataKey="value" fill="#156B32" radius={[0, 8, 8, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -334,37 +411,27 @@ export default function Home() {
 
         {/* Gráficos - Linha 7 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* Top 15 Equipamentos */}
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Top 15 Equipamentos</h2>
-            <ResponsiveContainer width="100%" height={400}>
-              <BarChart data={equipamentosData} layout="vertical" margin={{ top: 5, right: 30, left: 150, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-                <XAxis type="number" />
-                <YAxis dataKey="name" type="category" width={140} />
-                <Tooltip />
-                <Bar dataKey="value" fill="#156B32" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-
           {/* Tipo de Mercadoria */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Top 12 Tipos de Mercadoria</h2>
-            <ResponsiveContainer width="100%" height={400}>
-              <BarChart data={tipoMercadoriaData}>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={tipoMercadoriaData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-                <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#FFD700" />
+                <XAxis 
+                  dataKey="name" 
+                  angle={-45} 
+                  textAnchor="end" 
+                  height={100}
+                  tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }}
+                  interval={0}
+                />
+                <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
+                <Tooltip content={<CustomTooltip />} />
+                <Bar dataKey="value" fill="#FFD700" radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
-        </div>
 
-        {/* Gráficos - Linha 8 */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Estrutura do Comércio */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Estrutura do Comércio</h2>
@@ -375,11 +442,14 @@ export default function Home() {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
               </PieChart>
             </ResponsiveContainer>
           </div>
+        </div>
 
+        {/* Gráficos - Linha 8 */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Funcionários */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Funcionários</h2>
@@ -390,14 +460,11 @@ export default function Home() {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
               </PieChart>
             </ResponsiveContainer>
           </div>
-        </div>
 
-        {/* Gráficos - Linha 9 */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Família */}
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Composição Familiar (Crianças e Adolescentes)</h2>
@@ -408,25 +475,25 @@ export default function Home() {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
               </PieChart>
             </ResponsiveContainer>
           </div>
+        </div>
 
-          {/* MEI */}
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Cadastro MEI</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie data={meiData} cx="50%" cy="50%" labelLine={false} label={({ name, value }) => `${name}: ${value}`} outerRadius={100} fill="#1B7D3F" dataKey="value">
-                  {meiData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
+        {/* MEI */}
+        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm mb-8">
+          <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Cadastro MEI</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie data={meiData} cx="50%" cy="50%" labelLine={false} label={({ name, value }) => `${name}: ${value}`} outerRadius={100} fill="#1B7D3F" dataKey="value">
+                {meiData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip content={<CustomTooltip />} />
+            </PieChart>
+          </ResponsiveContainer>
         </div>
 
         {/* Rodapé */}
