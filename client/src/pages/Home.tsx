@@ -62,14 +62,15 @@ export default function Home() {
   const [aba, setAba] = useState<'titular' | 'conjuge' | 'tabela'>('titular');
 
   useEffect(() => {
+    const basePath = import.meta.env.BASE_URL || '/';
     Promise.all([
-      fetch('/dashboard_data.json').then(res => res.json()),
-      fetch('/piramide_etaria.json').then(res => res.json()),
-      fetch('/dashboard_data_conjuge.json').then(res => res.json()),
-      fetch('/piramide_etaria_conjuge.json').then(res => res.json()),
-      fetch('/possui_conjuge.json').then(res => res.json()),
-      fetch('/disponibilidade.json').then(res => res.json()),
-      fetch('/tabela_dados_tratados.json').then(res => res.json())
+      fetch(`${basePath}dashboard_data.json`).then(res => res.json()),
+      fetch(`${basePath}piramide_etaria.json`).then(res => res.json()),
+      fetch(`${basePath}dashboard_data_conjuge.json`).then(res => res.json()),
+      fetch(`${basePath}piramide_etaria_conjuge.json`).then(res => res.json()),
+      fetch(`${basePath}possui_conjuge.json`).then(res => res.json()),
+      fetch(`${basePath}disponibilidade.json`).then(res => res.json()),
+      fetch(`${basePath}tabela_dados_tratados.json`).then(res => res.json())
     ]).then(([dashData, pirData, conjData, pirConjData, possuiConjData, dispData, tabelaData]) => {
       setData(dashData);
       setPiramideData(pirData);
