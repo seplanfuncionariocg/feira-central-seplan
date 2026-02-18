@@ -1,0 +1,30 @@
+{
+  "piramide": [
+    {
+      "faixa": "18-29",
+      "masculino": 27,
+      "feminino": 10
+    },
+    {
+      "faixa": "30-39",
+      "masculino": 68,
+      "feminino": 41
+    },
+    {
+      "faixa": "40-49",
+      "masculino": 89,
+      "feminino": 80
+    },
+    {
+      "faixa": "50-59",
+      "masculino": 146,
+      "feminino": 109
+    },
+    {
+      "faixa": "60+",
+      "masculino": 173,
+      "feminino": 98
+    }
+  ],
+  "nao_informado": 18
+}
