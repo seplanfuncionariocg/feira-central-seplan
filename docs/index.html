@@ -10,9 +10,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800;900&family=Sora:wght@600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="/feira-central-seplan/assets/index-BEMn378P.js"></script>
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
+    <script type="module" crossorigin src="/feira-central-seplan/assets/index-DQnilpBF.js"></script>
     <link rel="stylesheet" crossorigin href="/feira-central-seplan/assets/index-RNxQNei4.css">
-    <script src="/__manus__/debug-collector.js" defer></script>
   </head>
 
   <body>
@@ -79,8 +95,8 @@ Error generating stack: `+l.message+`
     <div id="root"></div>
     <script
       defer
-      src="https://manus-analytics.com/umami"
-      data-website-id="8d52c15e-112a-4589-9f77-c2886ddc0ba8"></script>
+      src="%VITE_ANALYTICS_ENDPOINT%/umami"
+      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
   </body>
 
 </html>
