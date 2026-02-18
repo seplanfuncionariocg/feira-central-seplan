@@ -4,6 +4,7 @@ import { Users, TrendingUp, HomeIcon, Briefcase } from 'lucide-react';
 import PopulationPyramid from '@/components/PopulationPyramid';
 import SmartChart from '@/components/SmartChart';
 import EscolaridadeChart from '@/components/EscolaridadeChart';
+import DataTable from '@/components/DataTable';
 
 interface DashboardData {
   total_comerciantes: number;
