@@ -557,8 +557,8 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
               {/* Funcionários */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Funcionários</h2>
-                <SmartChart data={equipamentosData} colors={COLORS} barColor="#FFD700" />
+                <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Número de Funcionários por Estabelecimento</h2>
+                <SmartChart data={funcionariosData} colors={COLORS} barColor="#FFD700" />
               </div>
 
               {/* Família */}
