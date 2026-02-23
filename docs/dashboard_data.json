@@ -1,212 +1,194 @@
 {
-  "total_comerciantes": 859,
+  "total_comerciantes": 922,
   "genero": {
-    "Masculino": 506,
-    "Feminino": 339,
-    "Não informado": 10,
+    "Masculino": 541,
+    "Feminino": 367,
     "Outro": 4
   },
   "etnia": {
-    "Parda": 434,
-    "Branca": 355,
-    "Preta": 56,
-    "Não informado": 10,
+    "Parda": 466,
+    "Branca": 381,
+    "Preta": 61,
     "Indígena": 3,
-    "Amarela": 1
-  },
-  "faixa_etaria": {
-    "60+ anos": 271,
-    "50-59 anos": 255,
-    "40-49 anos": 169,
-    "30-39 anos": 109,
-    "18-29 anos": 37,
-    "Não informado": 18
+    "Amarela (descendência oriental)": 1
   },
   "escolaridade": {
-    "Ensino Fundamental Incompleto": 326,
-    "Ensino Médio Completo": 255,
-    "Ensino Fundamental Completo": 87,
-    "Ensino Superior Completo": 78,
-    "Ensino Médio Incompleto": 60,
-    "Ensino Superior Incompleto": 38,
-    "Não informado": 15
+    "Ensino Fundamental Incompleto": 347,
+    "Ensino Médio Completo": 268,
+    "Ensino Fundamental Completo": 94,
+    "Ensino Superior Completo": 80,
+    "Ensino Médio Incompleto": 72,
+    "Ensino Superior Incompleto": 35,
+    "Graduação Completa": 7,
+    "Tecnólogo": 4,
+    "Graduação Incompleta": 4,
+    "Pós Graduação (Especialização, Mestrtado, Doutorado, PhD, MBA)": 1
   },
   "estado_civil": {
-    "Casado(a)": 440,
-    "Solteiro(a)": 253,
-    "Divorciado(a)": 66,
-    "Viúvo(a)": 56,
-    "União Estável": 31,
-    "Não informado": 10,
-    "Separado(a)": 3
+    "Casado(a)": 464,
+    "Solteiro(a)": 282,
+    "Divorciado(a)": 70,
+    "Viúvo(a)": 59,
+    "União Estável": 33,
+    "Separado(a) judicialmente": 4
   },
   "moradia": {
-    "Própria (Quitada)": 679,
-    "Alugada": 96,
-    "Cedida/Emprestada": 53,
-    "Outra": 17,
-    "Não informado": 14
+    "Própria (já quitada)": 681,
+    "Alugada": 104,
+    "Cedida (emprestada por familiares/amigos)": 58,
+    "Própria (em financiamento)": 46,
+    "Outra": 18,
+    "Ocupação/Posse (sem documentação)": 3,
+    "Cohabitação": 2
   },
   "habitacao": {
-    "Conservada": 626,
-    "Boa": 153,
-    "Não informado": 78,
-    "Precária": 2
+    "Conservada": 440,
+    "Regular": 171,
+    "Boa": 137,
+    "Bem conservada": 54,
+    "Boa estrutura": 22,
+    "Não informado": 13,
+    "Simples": 12,
+    "Bom": 8,
+    "Estrutura boa": 7,
+    "Ótima": 6
   },
   "ocupacao_estabelecimento": {
-    "Titular": 442,
-    "Comprou de Outrem": 190,
-    "Alugado": 98,
-    "Herança": 71,
-    "Cedido": 48,
-    "Não informado": 10
+    "Titular": 470,
+    "Comprou de Outrem": 200,
+    "Alugado": 105,
+    "Herança": 83,
+    "Cedido": 54
   },
   "cidade": {
-    "Campina Grande": 632,
-    "Lagoa Seca": 82,
-    "Cg": 31,
-    "Matinhas": 15,
+    "Campina Grande": 710,
+    "Lagoa seca": 83,
+    "Matinhas": 18,
     "Massaranduba": 11,
-    "Queimadas": 10,
+    "Queimadas": 11,
     "Não informado": 10,
-    "Puxinanã": 7,
-    "São Sebastião De Lagoa De Roça": 6,
-    "Lagoa Nova": 6,
-    "Alagoa Nova": 5,
-    "São José Da Mata": 4,
-    "Caturité": 4,
-    "Lagoa De Roça": 4,
-    "Galante": 4,
-    "0": 3,
-    "Distrito De Galante": 2,
-    "Boa Vista": 2,
-    "Gado Bravo": 2,
-    "Soledade": 2,
-    "Serra Redonda": 2,
-    "Campo Grande": 1,
-    "Genipapo": 1,
-    "Alcantil": 1,
-    "São Sebastião De Lagoa De Rosa": 1,
-    "João Pessoa": 1,
-    "Município De Lagoa Seca": 1,
-    "83": 1,
-    "Lagoa De Rossa": 1,
-    "Puxinãnã": 1,
-    "Ch": 1,
-    "Barra De Santana": 1,
-    "Pocinhos": 1,
-    "Čampina Grande": 1,
-    "Logos Seca": 1,
-    "Matinha": 1
+    "Puxinana": 7,
+    "São sebastião de lagoa de roça": 6,
+    "Lagoa nova": 6,
+    "Lagoa de roça": 5
   },
   "fontes_renda": {
-    "Feira": 819,
-    "CLT": 8,
-    "Funcionário Público": 5,
-    "Aposentadoria": 155,
-    "Pensão": 13,
-    "Outro": 64
+    "Feira": 882,
+    "Aposentadoria": 164,
+    "Pensão": 14
   },
   "beneficios_governo": {
-    "Bolsa Família": 61,
-    "BPC": 14,
-    "Outro": 16,
-    "Não recebe": 758
+    "Não": 814,
+    "Bolsa Família": 67,
+    "Outro": 17,
+    "BPC": 14
   },
-  "infraestrutura": {
-    "Energia Elétrica": 571,
-    "Abastecimento de Água": 0,
+  "infraela": {
+    "Energia Elétrica": 608,
+    "Abastecimento de Água": 181,
     "Unidade Sanitária": 38,
-    "Coleta de Lixo Seletiva": 35,
-    "Coleta de Lixo Convencional": 814
+    "Coleta de Lixo": 912
+  },
+  "infraestrutura_detalhada": [
+    {
+      "name": "Energia Elétrica",
+      "Sim": 608,
+      "Não": 314,
+      "value": 608
+    },
+    {
+      "name": "Abastecimento de Água",
+      "Sim": 181,
+      "Não": 741,
+      "value": 181
+    },
+    {
+      "name": "Unidade Sanitária",
+      "Sim": 38,
+      "Não": 884,
+      "value": 38
+    },
+    {
+      "name": "Coleta de Lixo",
+      "Sim": 912,
+      "Não": 10,
+      "value": 912
+    }
+  ],
+  "infraestrutura": {
+    "Energia Elétrica": 608,
+    "Abastecimento de Água": 181,
+    "Unidade Sanitária": 38,
+    "Coleta de Lixo": 912
   },
   "equipamentos": {
-    "Outros": 469,
-    "Balança": 272,
-    "Freezer": 174,
-    "Ventilador": 119,
-    "Estante/Arara": 97,
-    "Estação de Trabalho / Bancada": 84,
-    "Fogão": 82,
-    "Mesas/Cadeiras": 73,
-    "Serra Fita de Bancada": 69,
-    "Televisão": 67,
-    "Botijão de Gás": 65,
-    "Refrigerador": 60,
-    "Liquidificador": 56,
-    "Lavatório": 41,
-    "Moedor de Carne": 33,
-    "Estufa de Salgados": 32,
-    "Som": 32,
-    "Sanduicheira": 26,
-    "Computador": 21,
-    "Cafeteira": 15,
-    "Microondas": 13,
-    "Chapeira": 12,
-    "Espremedor de Frutas": 11,
-    "Impressora": 11,
-    "Utensílios de Salão": 11,
+    "Freezer": 178,
+    "Refrigerador": 64,
     "Câmara Fria": 9,
-    "Fatiador de Frios": 9,
+    "Microondas": 15,
+    "Fogão": 83,
     "Forno Elétrico": 4,
-    "Ar condicionado": 4,
-    "Raspador de Côco Elétrico": 3,
+    "Buffet Térmico": 1,
+    "Raspador de Côco Elétrico": 4,
+    "Serra Fita de Bancada": 71,
+    "Balança": 287,
+    "Botijão de Gás": 66,
+    "Liquidificador": 56,
+    "Fatiador de Frios": 9,
+    "Moedor de Carne": 35,
+    "Cafeteira": 15,
+    "Espremedor de Frutas": 11,
+    "Moedor de Café": 1,
     "Moedor de Temperos": 3,
     "Air Fryer": 3,
+    "Sanduicheira": 27,
+    "Estufa de Salgados": 34,
     "Churrasqueira": 3,
-    "Buffet Térmico": 1,
-    "Moedor de Café": 1
+    "Ar condicionado": 4,
+    "Chapeira": 12,
+    "Ventilador": 127,
+    "Cadeiras": 73,
+    " Bancada": 86,
+    "Computador": 21,
+    "Televisão": 68,
+    "Som": 32,
+    "Impressora": 11,
+    "Arara": 105,
+    "Utensílios de Salão": 12,
+    "Lavatório": 42,
+    "Outros": 518
   },
-  "equipamentos_total_por_comerciante": 2.310826542491269,
   "tipo_mercadoria": {
-    "Frutas": 31,
-    "Carnes": 27,
-    "Carne": 23,
-    "Frutas ": 20,
-    "Calçados": 19,
-    "Carnes ": 17,
-    "Variedades": 14,
-    "Refeição ": 14,
-    "Bar": 14,
-    "Verduras": 13,
-    "Calçados ": 13,
-    "Viceras ": 12,
-    "Carne ": 11,
-    "Cereais": 11,
-    "Estivas e cereais": 10
+    "Frutas": 54,
+    "Carnes": 46,
+    "Carne": 35,
+    "Calçados": 32,
+    "Verduras": 24,
+    "Variedades": 24,
+    "Cereais": 19,
+    "Bar": 19,
+    "Depósito": 18,
+    "Estivas e cereais": 15,
+    "Roupas": 14,
+    "Refeição": 14,
+    "Viceras": 13,
+    "Frutas e verduras": 11,
+    "Queijo": 11
   },
   "estrutura_comercio": {
-    "Alvenaria": 528,
-    "Madeira": 185,
-    "Metal": 96,
-    "Lona / Pallet": 26,
-    "Carrinho Móvel": 11,
-    "Fibra": 3
-  },
-  "funcionarios": {
-    "Com funcionários": 75,
-    "Sem funcionários": 774,
-    "Média de funcionários": 1.9733333333333334
-  },
-  "familia": {
-    "Com crianças (0-11 anos)": 184,
-    "Com adolescentes (12-18 anos)": 165,
-    "Sem crianças/adolescentes": 510
-  },
-  "renda_stats": {
-    "media": 6248.134275618375,
-    "mediana": 1600.0,
-    "min": 0.0,
-    "max": 1612100.0
-  },
-  "renda_domiciliar_stats": {
-    "media": 7187.293286219081,
-    "mediana": 3000.0,
-    "min": 0.0,
-    "max": 650000.0
+    "Alvenaria": 536,
+    "Madeira": 203,
+    "Metal": 127,
+    "Lona / Pallet": 28,
+    "Carrinho Móvel": 14,
+    "Fibra": 4
   },
   "mei": {
-    "Não": 643,
-    "Sim": 206
+    "Não": 695,
+    "Sim": 217
+  },
+  "familia": {
+    "Com crianças (0-11 anos)": 134,
+    "Com adolescentes (12-18 anos)": 143
   }
 }
