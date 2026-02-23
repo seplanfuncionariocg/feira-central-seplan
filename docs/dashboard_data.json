@@ -54,16 +54,16 @@
     "Cohabitação": 2
   },
   "habitacao": {
-    "Conservada": 444,
-    "Regular": 172,
-    "Boa": 146,
-    "Bem Conservada": 57,
-    "Boa Estrutura": 24,
-    "Simples": 14,
-    "Não informado": 13,
-    "Ótima": 10,
-    "Estrutura Boa": 7,
-    "Conservado": 4
+    "Conservada": 507,
+    "Regular": 173,
+    "Boa": 150,
+    "Boa Estrutura": 31,
+    "Não informado": 17,
+    "Simples": 13,
+    "Ótima": 12,
+    "Necessita Reforma": 6,
+    "Ruim/Precária": 6,
+    "Razoável": 5
   },
   "ocupacao_estabelecimento": {
     "Titular": 470,
