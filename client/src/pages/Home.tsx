@@ -443,8 +443,10 @@ export default function Home() {
                     />
                     <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
                     <Tooltip content={<CustomTooltip />} />
+                    <Legend />
                     <Bar 
                       dataKey="value" 
+                      name="Comerciantes" 
                       fill="#156B32" 
                       radius={[8, 8, 0, 0]}
                       label={{ position: 'top', fill: '#000000', fontSize: 12, fontWeight: 500 }}
@@ -480,8 +482,10 @@ export default function Home() {
                     <XAxis type="number" tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
                     <YAxis dataKey="name" type="category" width={190} tick={{ fill: '#000000', fontSize: 11, fontWeight: 500 }} />
                     <Tooltip content={<CustomTooltip />} />
+                    <Legend />
                     <Bar 
                       dataKey="value" 
+                      name="Quantidade" 
                       fill="#1B7D3F" 
                       radius={[0, 8, 8, 0]}
                       label={{ position: 'right', fill: '#000000', fontSize: 12, fontWeight: 500 }}
@@ -499,8 +503,10 @@ export default function Home() {
                     <XAxis type="number" tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
                     <YAxis dataKey="name" type="category" width={140} tick={{ fill: '#000000', fontSize: 10, fontWeight: 500 }} />
                     <Tooltip content={<CustomTooltip />} />
+                    <Legend />
                     <Bar 
                       dataKey="value" 
+                      name="Quantidade" 
                       fill="#156B32" 
                       radius={[0, 8, 8, 0]}
                       label={{ position: 'right', fill: '#000000', fontSize: 12, fontWeight: 500 }}
@@ -528,8 +534,10 @@ export default function Home() {
                     />
                     <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
                     <Tooltip content={<CustomTooltip />} />
+                    <Legend />
                     <Bar 
                       dataKey="value" 
+                      name="Comerciantes" 
                       fill="#FFD700" 
                       radius={[8, 8, 0, 0]}
                       label={{ position: 'top', fill: '#000000', fontSize: 12, fontWeight: 500 }}
