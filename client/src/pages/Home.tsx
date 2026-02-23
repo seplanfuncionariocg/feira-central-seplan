@@ -624,7 +624,7 @@ export default function Home() {
               {/* Etnia Cônjuge */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Distribuição por Etnia</h2>
-                <SmartChart data={funcionariosData} colors={COLORS} barColor="#1B7D3F" />
+                <SmartChart data={etniaConjugeData} colors={COLORS} barColor="#1B7D3F" />
               </div>
             </div>
 
