@@ -1,22 +1,6 @@
 {
-  "total_conjuge": 501,
-  "genero": {
-    "Feminino": 341,
-    "Masculino": 159,
-    "Não informado": 1
-  },
-  "faixa_etaria": {
-    "60+": 141,
-    "50-59": 132,
-    "40-49": 102,
-    "30-39": 58,
-    "18-29": 14
-  },
-  "etnia": {
-    "Parda": 237,
-    "Branca": 227,
-    "Preta": 32,
-    "Não informado": 3,
-    "Indígena": 2
-  }
+  "total_conjuge": 0,
+  "genero": {},
+  "faixa_etaria": {},
+  "etnia": {}
 }

@@ -1,30 +1,30 @@
 {
   "piramide": [
     {
+      "faixa": "0-17",
+      "masculino": 0,
+      "feminino": 0
+    },
+    {
       "faixa": "18-29",
-      "masculino": 3,
-      "feminino": 11
+      "masculino": 0,
+      "feminino": 0
     },
     {
-      "faixa": "30-39",
-      "masculino": 15,
-      "feminino": 43
+      "faixa": "30-44",
+      "masculino": 0,
+      "feminino": 0
     },
     {
-      "faixa": "40-49",
-      "masculino": 31,
-      "feminino": 71
-    },
-    {
-      "faixa": "50-59",
-      "masculino": 53,
-      "feminino": 79
+      "faixa": "45-59",
+      "masculino": 0,
+      "feminino": 0
     },
     {
       "faixa": "60+",
-      "masculino": 50,
-      "feminino": 91
+      "masculino": 0,
+      "feminino": 0
     }
   ],
-  "nao_informado": 54
+  "nao_informado": 0
 }
