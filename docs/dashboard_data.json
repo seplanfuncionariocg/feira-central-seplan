@@ -700,10 +700,10 @@
     "Adolescentes (12-18)": 217
   },
   "renda_stats": {
-    "media": 0,
-    "mediana": 0,
-    "min": 0,
-    "max": 0
+    "media": 6996.1348684210525,
+    "mediana": 1600.0,
+    "min": 0.0,
+    "max": 1612100.0
   },
   "renda_domiciliar_stats": {
     "media": 7740.976973684211,
