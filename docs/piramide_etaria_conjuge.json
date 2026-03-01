@@ -3,27 +3,27 @@
     {
       "faixa": "0-17",
       "masculino": 1,
-      "feminino": 4
+      "feminino": 8
     },
     {
       "faixa": "18-29",
-      "masculino": 3,
-      "feminino": 12
+      "masculino": 2,
+      "feminino": 16
     },
     {
       "faixa": "30-44",
-      "masculino": 33,
-      "feminino": 72
+      "masculino": 41,
+      "feminino": 77
     },
     {
       "faixa": "45-59",
-      "masculino": 72,
-      "feminino": 131
+      "masculino": 82,
+      "feminino": 139
     },
     {
       "faixa": "60+",
-      "masculino": 61,
-      "feminino": 138
+      "masculino": 69,
+      "feminino": 152
     }
   ],
   "nao_informado": 0

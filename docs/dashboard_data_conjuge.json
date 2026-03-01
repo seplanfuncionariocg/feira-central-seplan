@@ -1,16 +1,16 @@
 {
-  "total_conjuge": 528,
+  "total_conjuge": 588,
   "genero": {
-    "Feminino": 357,
-    "Masculino": 170,
+    "Feminino": 392,
+    "Masculino": 195,
     "Não informado": 1
   },
   "faixa_etaria": {
-    "45-59": 203,
-    "60+": 200,
-    "30-44": 105,
-    "18-29": 15,
-    "0-17": 5
+    "60+": 222,
+    "45-59": 221,
+    "30-44": 118,
+    "18-29": 18,
+    "0-17": 9
   },
   "etnia": {}
 }
