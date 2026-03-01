@@ -430,20 +430,20 @@ export default function Home() {
               {/* Top 10 Cidades */}
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-[#1B7D3F] mb-4">Top 10 Cidades com Mais Comerciantes</h2>
-                <ResponsiveContainer width="100%" height={350}>
-                  <BarChart data={cidadeData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
+                <ResponsiveContainer width="100%" height={450}>
+                  <BarChart data={cidadeData} margin={{ top: 5, right: 30, left: 0, bottom: 120 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
                     <XAxis 
                       dataKey="name" 
                       angle={-45} 
                       textAnchor="end" 
-                      height={100}
-                      tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }}
+                      height={120}
+                      tick={{ fill: '#000000', fontSize: 11, fontWeight: 500 }}
                       interval={0}
                     />
                     <YAxis tick={{ fill: '#000000', fontSize: 12, fontWeight: 500 }} />
                     <Tooltip content={<CustomTooltip />} />
-                    <Legend />
+                    <Legend wrapperStyle={{ paddingTop: '20px' }} />
                     <Bar 
                       dataKey="value" 
                       name="Comerciantes" 
