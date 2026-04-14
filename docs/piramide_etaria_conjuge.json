@@ -8,22 +8,22 @@
     {
       "faixa": "18-29",
       "masculino": 2,
-      "feminino": 16
+      "feminino": 21
     },
     {
       "faixa": "30-44",
-      "masculino": 41,
-      "feminino": 77
+      "masculino": 53,
+      "feminino": 120
     },
     {
       "faixa": "45-59",
-      "masculino": 82,
-      "feminino": 139
+      "masculino": 107,
+      "feminino": 198
     },
     {
       "faixa": "60+",
-      "masculino": 69,
-      "feminino": 152
+      "masculino": 89,
+      "feminino": 180
     }
   ],
   "nao_informado": 0
