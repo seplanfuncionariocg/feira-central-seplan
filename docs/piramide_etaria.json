@@ -2,28 +2,28 @@
   "piramide": [
     {
       "faixa": "0-17",
-      "masculino": 3,
+      "masculino": 1,
       "feminino": 1
     },
     {
       "faixa": "18-29",
-      "masculino": 52,
-      "feminino": 21
+      "masculino": 39,
+      "feminino": 18
     },
     {
       "faixa": "30-44",
-      "masculino": 192,
-      "feminino": 111
+      "masculino": 157,
+      "feminino": 94
     },
     {
       "faixa": "45-59",
-      "masculino": 304,
-      "feminino": 238
+      "masculino": 238,
+      "feminino": 193
     },
     {
       "faixa": "60+",
-      "masculino": 248,
-      "feminino": 144
+      "masculino": 197,
+      "feminino": 114
     }
   ],
   "nao_informado": 0

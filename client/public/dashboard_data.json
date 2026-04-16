@@ -1,69 +1,69 @@
 {
-  "total_comerciantes": 1338,
+  "total_comerciantes": 1053,
+  "total_boxes": 1338,
   "genero": {
-    "Masculino": 799,
-    "Feminino": 515,
-    "Não informado": 20,
-    "Outro": 4
+    "Masculino": 632,
+    "Feminino": 420,
+    "Não informado": 1
   },
   "etnia": {
-    "Parda": 697,
-    "Branca": 527,
-    "Preta": 90,
-    "Não informado": 20,
+    "Parda": 578,
+    "Branca": 395,
+    "Preta": 75,
     "Indígena": 3,
+    "Não informado": 1,
     "Amarela (descendência oriental)": 1
   },
   "faixa_etaria": {
-    "45-59": 542,
-    "60+": 413,
-    "30-44": 303,
-    "18-29": 73,
-    "0-17": 7
+    "45-59": 431,
+    "60+": 312,
+    "30-44": 251,
+    "18-29": 57,
+    "0-17": 2
   },
   "escolaridade": {
-    "Ensino Fundamental Incompleto": 559,
-    "Ensino Médio Completo": 373,
-    "Ensino Fundamental Completo": 116,
-    "Ensino Médio Incompleto": 106,
-    "Ensino Superior Completo": 102,
-    "Ensino Superior Incompleto": 46,
-    "Não informado": 20,
-    "Graduação Completa": 7,
+    "Ensino Fundamental Incompleto": 476,
+    "Ensino Médio Completo": 284,
+    "Ensino Fundamental Completo": 92,
+    "Ensino Médio Incompleto": 84,
+    "Ensino Superior Completo": 70,
+    "Ensino Superior Incompleto": 32,
+    "Graduação Completa": 5,
     "Tecnólogo": 4,
     "Graduação Incompleta": 4,
+    "Não informado": 1,
     "Pós Graduação (Especialização, Mestrtado, Doutorado, PhD, MBA)": 1
   },
   "estado_civil": {
-    "Casado(a)": 678,
-    "Solteiro(a)": 382,
-    "Divorciado(a)": 102,
-    "Viúvo(a)": 80,
-    "União Estável": 65,
-    "Não informado": 20,
-    "Separado(a) judicialmente": 11
+    "Casado(a)": 542,
+    "Solteiro(a)": 305,
+    "Divorciado(a)": 82,
+    "Viúvo(a)": 62,
+    "União Estável": 51,
+    "Separado(a) judicialmente": 10,
+    "Não informado": 1
   },
   "moradia": {
-    "Própria (já quitada)": 1013,
-    "Alugada": 136,
-    "Cedida (emprestada por familiares/amigos)": 79,
-    "Própria (em financiamento)": 59,
-    "Outra": 22,
-    "Não informado": 20,
+    "Própria (já quitada)": 790,
+    "Alugada": 114,
+    "Cedida (emprestada por familiares/amigos)": 72,
+    "Própria (em financiamento)": 51,
+    "Outra": 17,
     "Cohabitação": 5,
-    "Ocupação/Posse (sem documentação)": 4
+    "Ocupação/Posse (sem documentação)": 3,
+    "Não informado": 1
   },
   "habitacao": {
-    "Conservada": 719,
-    "Regular": 273,
-    "Boa": 222,
-    "Boa Estrutura": 36,
-    "Não informado": 27,
-    "Simples": 21,
-    "Ótima": 16,
+    "Conservada": 567,
+    "Regular": 242,
+    "Boa": 168,
+    "Boa Estrutura": 26,
+    "Simples": 19,
     "Necessita Reforma": 7,
     "Ruim/Precária": 7,
-    "Razoável": 5
+    "Razoável": 5,
+    "Ótima": 5,
+    "Não informado": 4
   },
   "ocupacao_estabelecimento": {
     "Titular": 623,
@@ -74,29 +74,29 @@
     "Não informado": 20
   },
   "cidade": {
-    "Campina Grande": 929,
-    "Lagoa Seca": 178,
-    "Matinhas": 38,
-    "Massaranduba": 25,
-    "Não informado": 20,
+    "Campina Grande": 713,
+    "Lagoa Seca": 151,
+    "Matinhas": 35,
+    "Massaranduba": 23,
     "Lagoa De Roça": 16,
-    "Alagoa Nova": 15,
     "São Sebastião De Lagoa De Roça": 14,
-    "Queimadas": 13,
-    "Puxinana": 10
+    "Queimadas": 12,
+    "Alagoa Nova": 11,
+    "Puxinana": 9,
+    "Lagoa Nova": 9
   },
   "fontes_renda": {
-    "Até 1 salário mínimo": 710,
-    "De 1 a 3 salários mínimos": 521,
-    "De 3 a 5 salários mínimos": 61,
-    "Mais de 5 salários mínimos": 26,
-    "Não informado": 20
+    "Até 1 salário mínimo": 604,
+    "De 1 a 3 salários mínimos": 400,
+    "De 3 a 5 salários mínimos": 36,
+    "Mais de 5 salários mínimos": 12,
+    "Não informado": 1
   },
   "beneficios_governo": {
-    "Bolsa Família": 115,
-    "BPC": 19,
-    "Outro": 23,
-    "Não": 1162
+    "Bolsa Família": 105,
+    "BPC": 16,
+    "Outro": 16,
+    "Não": 916
   },
   "infraestrutura": {
     "Energia Elétrica: Sim": 756,
@@ -145,7 +145,7 @@
     "Lavatório": 45,
     "Outros": 782
   },
-  "equipamentos_total_por_comerciante": 2.0971599402092678,
+  "equipamentos_total_por_comerciante": 2.664767331433998,
   "tipo_mercadoria": {
     "Frutas": 79,
     "Frutas ": 61,
@@ -746,24 +746,24 @@
     "6": 3
   },
   "familia": {
-    "Crianças (0-11)": 420,
-    "Adolescentes (12-18)": 331
+    "Crianças (0-11)": 356,
+    "Adolescentes (12-18)": 277
   },
   "renda_stats": {
-    "media": 5396.177541729894,
-    "mediana": 1600.0,
+    "media": 5375.583650190114,
+    "mediana": 1518.0,
     "min": 0.0,
     "max": 1612100.0
   },
   "renda_domiciliar_stats": {
-    "media": 6228.927162367223,
-    "mediana": 2500.0,
+    "media": 6189.110266159696,
+    "mediana": 2400.0,
     "min": 0.0,
     "max": 650000.0
   },
   "mei": {
-    "Não": 1052,
-    "Sim": 266,
-    "Não informado": 20
+    "Não": 875,
+    "Sim": 177,
+    "Não informado": 1
   }
 }
