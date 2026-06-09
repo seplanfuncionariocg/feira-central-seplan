@@ -7393,11 +7393,11 @@
   },
   {
     "Disponibilidade do Comerciante": "Disponível",
-    "Número da Selagem": "MC 089",
+    "Número da Selagem": "MD 089",
     "Gênero": "Masculino",
     "Etnia / Cor": "Branca",
     "Renda Média Mensal do Feirante": "De 1 a 3 salários mínimos",
-    "Cidade": "Campina Grande "
+    "Cidade": "Campina Grande"
   },
   {
     "Disponibilidade do Comerciante": "Disponível",
@@ -9688,14 +9688,6 @@
     "Cidade": "Lagoa de Roça "
   },
   {
-    "Disponibilidade do Comerciante": "Indisponível",
-    "Número da Selagem": "MD 057",
-    "Gênero": "NI",
-    "Etnia / Cor": "NI",
-    "Renda Média Mensal do Feirante": "NI",
-    "Cidade": "NI"
-  },
-  {
     "Disponibilidade do Comerciante": "Disponível",
     "Número da Selagem": "MD 232",
     "Gênero": "Feminino",
@@ -10702,5 +10694,317 @@
     "Etnia / Cor": "Branca",
     "Renda Média Mensal do Feirante": "De 1 a 3 salários mínimos",
     "Cidade": "Campina grande "
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "MPA  051",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Branca",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Campina Grande"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "MD223",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Lagoa Seca "
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "MD 238",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Branca",
+    "Renda Média Mensal do Feirante": "De 1 a 3 salários mínimos",
+    "Cidade": "Lagoa Seca "
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "AS.186",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Branca",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Campina Grande"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "MD.109",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Branca",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Campina Grande"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "JT.015",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Lagoa Seca"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "iDCC057",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Campina grande"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "JT.125",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Preta",
+    "Renda Média Mensal do Feirante": "De 1 a 3 salários mínimos",
+    "Cidade": "Campina Grande"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "JT. 146",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Campina Grande"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "JT. 182",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Campina Grande"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "IDMD 211",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Branca",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Alagoa de Roça "
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "IDPMD  146",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Mais de 5 salários mínimos",
+    "Cidade": "Campina Grande "
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "IDPMD 145",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "De 3 a 5 salários mínimos",
+    "Cidade": "Campina Grande "
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "IDCA 074",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "De 3 a 5 salários mínimos",
+    "Cidade": "Campina Grande "
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "IDCA 049",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "De 1 a 3 salários mínimos",
+    "Cidade": "Campina Grande"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "Md168",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Cg"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "Cc054",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Branca",
+    "Renda Média Mensal do Feirante": "De 1 a 3 salários mínimos",
+    "Cidade": "Cg"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "AS.089",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Branca",
+    "Renda Média Mensal do Feirante": "De 1 a 3 salários mínimos",
+    "Cidade": "Campina Grande "
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "PMD.162",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Branca",
+    "Renda Média Mensal do Feirante": "De 1 a 3 salários mínimos",
+    "Cidade": "Campina Grande "
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "JT. 172",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "De 1 a 3 salários mínimos",
+    "Cidade": "Massaranduba"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "CA 062",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Matinhas"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "MD.239",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Campina grande pb "
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "MD 164",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Campina Grande"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "JT. 141",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Campina Grande"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "ID-095",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Campina Grande Pb"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "MC 512",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Campina Grande"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "PMD  158",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Branca",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Campina Grande"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "MD.240 ",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "De 1 a 3 salários mínimos",
+    "Cidade": "Queimadas"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "MD 219",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Branca",
+    "Renda Média Mensal do Feirante": "De 1 a 3 salários mínimos",
+    "Cidade": "Campina Grande"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "MD 166",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Lagoa Seca"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "PAC 085",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Campina Grande"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "Id-MC.088",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Lagoa Seca"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "Jt218",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Lagoa de roça "
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "Mc497",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "De 1 a 3 salários mínimos",
+    "Cidade": "Cg"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "Jt095",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Cg"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "Pac089",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Preta",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Lagoa seca "
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "PMD.159",
+    "Gênero": "Feminino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Campina Grande "
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "MD.087",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Lagoa seca"
+  },
+  {
+    "Disponibilidade do Comerciante": "Disponível",
+    "Número da Selagem": "MD.088",
+    "Gênero": "Masculino",
+    "Etnia / Cor": "Parda",
+    "Renda Média Mensal do Feirante": "Até 1 salário mínimo",
+    "Cidade": "Matinhas "
   }
 ]

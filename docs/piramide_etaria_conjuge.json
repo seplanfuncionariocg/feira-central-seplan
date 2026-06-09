@@ -12,18 +12,18 @@
     },
     {
       "faixa": "30-44",
-      "masculino": 42,
-      "feminino": 84
+      "masculino": 45,
+      "feminino": 89
     },
     {
       "faixa": "45-59",
-      "masculino": 75,
-      "feminino": 128
+      "masculino": 77,
+      "feminino": 131
     },
     {
       "faixa": "60+",
-      "masculino": 52,
-      "feminino": 78
+      "masculino": 53,
+      "feminino": 80
     }
   ],
   "nao_informado": 0
